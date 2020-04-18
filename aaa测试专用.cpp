@@ -4,8 +4,6 @@
 using namespace std;
 int main()
 {
-	freopen("uva11059.txt","r",stdin);
-	freopen("baoli.txt","w",stdout);
     llt n,num[20],ans,test=1;
     while(scanf("%lld",&n)!=-1)
     {

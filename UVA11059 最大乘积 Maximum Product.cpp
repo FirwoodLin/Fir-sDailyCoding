@@ -3,26 +3,21 @@
 #include <cstring>
 #include <algorithm>
 using namespace std;
-
+long long a[30];
 int main(){
-    freopen("uva11059.txt","r",stdin);
-    freopen("mine.txt","w",stdout);
-    long long n,cnt=0;
-    while(scanf("%lld",&n)!=-1){
-        int a[50];
-        memset(a,0,sizeof(a));
-        for(int i=1;i<=n;i++)
+    int n,cnt=1;
+    while(scanf("%d",&n)!=-1){
+        for(int i=0;i<n;i++)
             scanf("%lld",&a[i]);
-        long long maxans=0;
-        for(int i=1;i<=n;i++){
-            long long product=a[i];
-            for(int j=i+1;j<=n;j++){
-                product*=a[j];
-                if(product==0) break;
-                maxans=max(product,maxans);
+        long long maxn=0;
+        for(int i=0;i<n;i++){
+            for(long long ans=1,j=i;j<n;j++){
+                ans*=a[j];
+                maxn=max(maxn,ans);
             }
         }
-        printf("Case #%d: The maximum product is %lld.\n\n",++cnt,maxans);
-    }   
+        printf("Case #%d: The maximum product is %lld.\n\n",cnt,maxn);
+        cnt++;
+    }
     return 0;
 }
