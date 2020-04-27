@@ -1,32 +1,27 @@
 #include <iostream>
 #include <cstdio>
+#include <cmath>
+#include <algorithm>
+
 using namespace std;
 
-int n;
-int mi[]={1,2,4,8,16,31,64,128,256,512,1024,2048,4096,4096*2,4096*4,4096*8};
-void find(int x){
-	if(x==0) return;
-	if(x==1) printf("2(0)");
-	if(x==2) printf("2");
-	int q;
-	for(int i=14;i<=0;i--)
-		if(x>=mi[i]){
-			q=i;break;
+void sol(int n){
+	for(int i=14;i>=0;i--){
+		if(pow(2,i)<=n){
+			if(i==1) cout<<"2";
+			else if(i==0) cout<<"2(0)";
+			else{
+				cout<<"2(";
+				sol(i);
+				cout<<")";
+			}
+			n-=pow(2,i);
+			if(n!=0) cout<<"+";
 		}
-	if(x>=2){
-		if(q>1){
-			printf("2(");
-			find(q);
-			printf(")");
-		}	
-	}
-	if(n!=mi[q]){
-		printf("+");
-		find(n-mi[q]);
 	}
 }
 int main(){
-	scanf("%d",&n);	
-	find(n);
-	return 0;
+    int n;
+    cin>>n;
+    sol(n);
 }
