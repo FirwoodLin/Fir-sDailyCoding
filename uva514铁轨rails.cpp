@@ -27,10 +27,10 @@ int main(){
 					tot=target;
 				}
 				else{
-					if(c.top()==target)
-						c.pop();
-					else{
+					if(c.empty() || c.top()!=target){
 						err=1;break;}
+					else{
+						c.pop();}
 				}
 			}
 			if(err==0) printf("Yes\n");
