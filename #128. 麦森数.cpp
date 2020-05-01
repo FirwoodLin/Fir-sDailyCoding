@@ -8,6 +8,7 @@ using namespace std;
 int a[1000+10]={0},b[1000+10]={0};//ans;base;
 
 void times(int *a,int *b,int *c){
+    printf("times started\n");
     int t[600]={0};
     for(int i=1;i<=a[0];i++){
         int jw=0;
@@ -20,16 +21,19 @@ void times(int *a,int *b,int *c){
     }
     t[0]=a[0]+b[0];
     while(t[t[0]]==0 && t[0]>1) t[0]--;
-    if(t[0]>500) t[0]=500;
+    t[0]=500;
     for(int i=t[0];i>=0;i--)
         c[i]=t[i];
+    printf("times ended\n");
 }
 void ksm(int x){
     while(x){
+        printf("%d started\n",x);
         if(x%2 == 1){
             times(b,a,b);
         }
         times(a,a,a);
+        printf("%d ended\n",x);
         x/=2;
     }
 }
@@ -48,7 +52,7 @@ void init(){
 int main(){
     int p;
     cin>>p;
-    cout<<floor(log(10)*(p-1)/log(2))+1<<endl;
+    cout<<floor(log(2) * p / log(10))+1<<endl;
     init();
     ksm(p);
     print(a);
