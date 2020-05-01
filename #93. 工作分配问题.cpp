@@ -7,11 +7,22 @@ int a[25][25],v[25],ans[25];//第i个工作由ans[i]做
 int n;
 long long minn = pow(2,60);
 
-void sol(int pos){//第几项工作
+void sol(int pos,long long  now){//第几项工作
     if(pos>n){
-        int sum=0;
-        for(int i=1;i<=n;i++)//工作
-            sum+=a[ans[i]][i];
+        minn=min(now,minn);
+        return;
+    }
+
+    for(int i=1;i<=n;i++){
+        if(v[i]==0){
+            v[i]=1;
+            ans[i]=pos;
+            now+=a[ans[i]][i];
+            if(now<minn)
+                sol(pos+1,now);
+            now-=a[ans[i]][i];
+            v[i]=0;
+        }
     }
 }
 
@@ -22,6 +33,7 @@ int main(){
             cin>>a[i][j];
         }
     }
-
-
+    sol(1,0);
+    cout<<minn<<endl;
+    return 0;
 }
