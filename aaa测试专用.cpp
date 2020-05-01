@@ -1,48 +1,48 @@
-#include <iostream>
+#include<cstdio>
+#include <cstring>
+#include<iostream>
+#define ll long long 
 using namespace std;
-int a[100000+10], r[100000+10];
-int n;
-void msort(int s, int t)
-{
-    if (s == t)
-        return;
-    //如果只有一个数字则返回，无须排序
-    int mid = (s + t) / 2;
-    msort(s, mid);                 //分解左序列
-    msort(mid + 1, t);             //分解右序列
-    
-    int i = s/*i:s~mid*/, j = mid + 1/*j:mid+1~t*/, k = s/*r 的下标*/; 
-    //接下来合并
-    while (i <= mid && j <= t)
-    {
-        if (a[i] <= a[j])   //顺序正确
-            r[k++]=a[i++];
-        else                //逆序对出现
-            r[k++]=a[j++];
-    }
-    //放入剩余元素
-    while (i <= mid) //复制左边子序列剩余
-        r[k++] = a[i++];
-    while (j <= t) //复制右边子序列剩余
-        r[k++] = a[j++];
+const int maxn=5e5+5;
+//下面就是 归并排序求逆序对 的过程==
+int a[100],b[100],c[100];
 
-    for (int i = s; i <= t; i++)
-        a[i] = r[i];
-    return;
+void times(int *a,int *b,int *c){
+    int t[600];
+    memset(t,0,sizeof(t));
+    for(int i=1;i<=a[0];i++){
+        int jw=0;
+        for(int j=1;j<=b[0];j++){
+            int w = i+j-1;
+            t[w] += a[i]*b[j]+jw;
+            jw = t[w]/10;
+            t[w]%=10;
+        }
+        t[i+b[0]] += jw;
+    }
+    t[0] = a[0]+b[0];
+    while(t[t[0]]==0 && t[0]>1) t[0]--;
+    t[0] = t[0]>500 ? 500 : t[0];
+    for(int i=t[0];i>=0;i--){
+        c[i]=t[i];
+    }
+    for(int i=c[0];i>=1;i--)
+        printf("%d",c[i]);
+    printf("\n");
 }
 
-int main()
-{
-    int n;
-    cin >> n;
-    for (int i = 1; i <= n; i++)
-    {
-        cin >> a[i];
-    }
-    msort(1, n);
-    for (int i = 1; i <= n; i++)
-    {
-        cout << a[i] << " ";
-    }
+int main(){
+    scanf("%d%d",&a[0],&b[0]);
+    getchar();
+    // cout<<"jifasfofsio";
+    for(int i=a[0];i>=1;i--)
+        a[i] = getchar()-'0';
+    for(int i=b[0];i>=1;i--)
+        b[i] = getchar()-'0';
+    times(a,b,c);
+    for(int i=c[0];i>=1;i--)
+        printf("%d",c[i]);
+
     return 0;
+    
 }
