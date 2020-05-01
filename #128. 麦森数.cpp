@@ -7,7 +7,7 @@ int ans[100000]={1,1};
 int base[100000]={1,2};
 
 void times(int *a,int *b,int *c){
-    int t[600]={0};
+    int t[1000]={0};
     for(int i=1;i<=a[0];i++){
         int jw=0;
         for(int j=1;j<=b[0];j++){
@@ -24,9 +24,9 @@ void times(int *a,int *b,int *c){
     for(int i=t[0];i>=0;i--){
         c[i]=t[i];
     }
-    for(int i=c[0];i>=1;i--)
-        printf("%d",c[i]);
-    printf("\n");
+    // for(int i=c[0];i>=1;i--)
+    //     printf("%d",c[i]);
+    // printf("\n");
 
 }
 
@@ -48,8 +48,8 @@ int main(){
     long long ws = floor((1.0*n*log(2)) /log(10)) +1;
     printf("%lld\n",ws);
     for(int i=500;i>=1;i--){
+        if(i%50==0 && i!=500) printf("\n");
         printf("%d",ans[i]);
-        if(i%50==0) printf("\n");
     }
     return 0;
 }
