@@ -11,14 +11,16 @@ void msort(int s, int t)
     msort(s, mid);                 //分解左序列
     msort(mid + 1, t);             //分解右序列
     
-    int i = s, j = mid + 1, k = s; //接下来合并
+    int i = s/*i:s~mid*/, j = mid + 1/*j:mid+1~t*/, k = s/*r 的下标*/; 
+    //接下来合并
     while (i <= mid && j <= t)
     {
-        if (a[i] <= a[j])
+        if (a[i] <= a[j])   //顺序正确
             r[k++]=a[i++];
-        else
+        else                //逆序对出现
             r[k++]=a[j++];
     }
+    //放入剩余元素
     while (i <= mid) //复制左边子序列剩余
         r[k++] = a[i++];
     while (j <= t) //复制右边子序列剩余
